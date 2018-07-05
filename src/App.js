@@ -36,9 +36,21 @@ const shaders = Shaders.create({
           float angleRad = atan2(-v1.x, -v1.y);
           float angleDeg = angleRad * (180.0 / M_PI) + 180.0;
           if (angleDeg < angle) {
-            gl_FragColor = vec4(mix(color, bgColor, smoothstep(0.0, border, distFromRad)), 1);
+            gl_FragColor = vec4(
+              mix(
+                color, 
+                bgColor, 
+                smoothstep(0.0, border * 1.5, distFromRad)
+              ), 
+            1);
           } else {
-            gl_FragColor = vec4(bgColor, 1);
+            gl_FragColor = vec4(
+              mix(
+                color, 
+                bgColor, 
+                smoothstep(0.0, border * 0.8, distFromRad)
+              ), 
+            1);
           }
         } else {
           gl_FragColor = vec4(bgColor, 1);
@@ -46,6 +58,8 @@ const shaders = Shaders.create({
       }`
   }
 })
+
+// * smoothstep(30.0, 20.0, abs(angleDeg - angle))
 
 class Cirlce extends Component {
   render() {
